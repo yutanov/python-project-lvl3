@@ -1,0 +1,25 @@
+2021-12-29 22:27:34,127 pageloader.maker DEBUG    Page directory is created
+2021-12-29 22:27:34,127 pageloader.name DEBUG    Name for riptutorial.com generated
+2021-12-29 22:27:34,128 pageloader.maker DEBUG    Files directory is created
+2021-12-29 22:27:34,134 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): riptutorial.com:80
+2021-12-29 22:27:34,526 urllib3.connectionpool DEBUG    http://riptutorial.com:80 "GET / HTTP/1.1" 301 141
+2021-12-29 22:27:34,531 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): riptutorial.com:443
+2021-12-29 22:27:35,419 urllib3.connectionpool DEBUG    https://riptutorial.com:443 "GET / HTTP/1.1" 200 5664
+2021-12-29 22:27:35,533 pageloader.name DEBUG    Name for images/logo_rip_full_white generated
+2021-12-29 22:27:35,533 pageloader.name DEBUG    Name for images/logo_rip_full_white generated
+2021-12-29 22:27:35,534 pageloader.name DEBUG    Name for m2d.m2.ai/pghb.riptutorial.home generated
+2021-12-29 22:27:35,535 pageloader.name DEBUG    Name for images/logo_rip generated
+2021-12-29 22:27:35,536 pageloader.name DEBUG    Name for assets/css/master.min.css?v=1.0.0 generated
+2021-12-29 22:27:35,536 pageloader.name DEBUG    Name for riptutorial.com generated
+2021-12-29 22:27:35,557 pageloader.pager DEBUG    Page is changed
+2021-12-29 22:27:35,562 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): riptutorial.com:80
+2021-12-29 22:27:35,964 urllib3.connectionpool DEBUG    http://riptutorial.com:80 "GET /Images/logo_rip_full_white.png HTTP/1.1" 200 2167
+2021-12-29 22:27:35,972 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): riptutorial.com:80
+2021-12-29 22:27:36,368 urllib3.connectionpool DEBUG    http://riptutorial.com:80 "GET /Images/logo_rip_full_white.png HTTP/1.1" 200 2167
+2021-12-29 22:27:36,385 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): riptutorial.com:80
+2021-12-29 22:27:36,778 urllib3.connectionpool DEBUG    http://riptutorial.com:80 "GET //m2d.m2.ai/pghb.riptutorial.home.js HTTP/1.1" 404 1245
+2021-12-29 22:27:36,797 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): riptutorial.com:80
+2021-12-29 22:27:37,205 urllib3.connectionpool DEBUG    http://riptutorial.com:80 "GET /Images/logo_rip.png HTTP/1.1" 200 902
+2021-12-29 22:27:37,225 urllib3.connectionpool DEBUG    Starting new HTTP connection (1): riptutorial.com:80
+2021-12-29 22:27:37,640 urllib3.connectionpool DEBUG    http://riptutorial.com:80 "GET /assets/css/master.min.css?v=1.0.0.21822 HTTP/1.1" 200 6535
+2021-12-29 22:27:37,647 pageloader.pager DEBUG    Odjects downloaded

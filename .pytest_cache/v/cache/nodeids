@@ -1,0 +1,7 @@
+[
+  "tests/test_main.py::test_download_objects",
+  "tests/test_main.py::test_gen_name",
+  "tests/test_main.py::test_get_obj_and_change",
+  "tests/test_main.py::test_make_files_dir",
+  "tests/test_main.py::test_make_page_dir"
+]
