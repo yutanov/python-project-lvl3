@@ -8,3 +8,5 @@ build-reinstall:
 	python3 -m pip install --force-reinstall dist/*.whl
 package-install:
 	python3 -m pip install --user dist/*.whl
+test:
+	poetry run pytest

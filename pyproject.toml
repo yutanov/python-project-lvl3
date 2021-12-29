@@ -10,6 +10,9 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.9"
 pytest = "^6.2.5"
+bs4 = "^0.0.1"
+progress = "^1.6"
+requests = "^2.26.0"
 
 [tool.poetry.dev-dependencies]
 

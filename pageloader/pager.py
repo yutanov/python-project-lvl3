@@ -48,11 +48,11 @@ def get_obj_and_change(site_url, file_dir, output):
             if source_value is not None and source_value.startswith('/'):
                 base, ext = os.path.splitext(source_value)
                 if ext:
-                    new_value = gen_name(source_value)
+                    new_value = f'{gen_name(base)}{ext}'
                     resources.append(
                         {'old_value': source_value, 'new_value': new_value},
                     )
-                    el[source] = os.path.join(file_dir, new_value)
+                    el[source] = os.path.join(os.getcwd(), file_dir, new_value)
     name = gen_name(site_url) + '.html'
     with open(os.path.join(output, name), 'w') as p:
         p.write(str(soup))

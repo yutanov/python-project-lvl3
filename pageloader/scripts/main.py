@@ -21,7 +21,7 @@ def main():
         if output is None:
             output = os.getcwd()
         make_page_dir(output)
-        file_dir = make_files_dir(site_url)
+        file_dir = make_files_dir(site_url, output)
         resources = get_obj_and_change(site_url, file_dir, output)
         download_objects(resources, site_url, file_dir)
     except Exception as e:

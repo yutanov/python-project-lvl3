@@ -13,10 +13,10 @@ def make_page_dir(output):
     log.debug('Page directory is created')
 
 
-def make_files_dir(site_url):
+def make_files_dir(site_url, output):
     file_dir = gen_name(site_url) + '_files'
-    if os.path.exists(file_dir) == False:
-        os.makedirs(file_dir)
-    FILES_DIR = file_dir
+    path = os.path.join(output, file_dir)
+    if os.path.exists(path) == False:
+        os.makedirs(path)
     log.debug('Files directory is created')
-    return file_dir
+    return path
