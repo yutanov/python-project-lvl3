@@ -1,0 +1,42 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8.10]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          pip install coverage
+          poetry env use 3.8
+          make install
+          
+      - name: Run lint
+        run: make lint
+
+      - name: Run test
+        run: make test
+        
+      #- name: Test & publish code coverage
+      #  uses: paambaati/codeclimate-action@v3.0.0
+      #  env:
+      #      CC_TEST_REPORTER_ID: ebfd4e7783cedc255563e73db145f43260683f68372e65d314418214e4db6818
+      #  with:
+      #    coverageCommand: coverage run -m unittest
+      #    debug: true
