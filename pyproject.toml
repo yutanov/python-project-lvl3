@@ -22,4 +22,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-page-loader = "page_loader.scripts.main:main"
+page-loader = "page_loader.scripts.page_loader:main"
