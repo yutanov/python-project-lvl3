@@ -11,4 +11,4 @@ package-install:
 test:
 	poetry run pytest
 lint: ## Run linter
-	poetry run flake8 page-loader
+	poetry run flake8 page_loader

@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
-from urllib.parse import urlparse
-from page_loader.maker import make_files_dir
+# from urllib.parse import urlparse
+# from page_loader.maker import make_files_dir
 from page_loader.name import gen_name
 from progress.bar import IncrementalBar
 import logging
@@ -23,7 +23,7 @@ def check_status(page):
     if status != 200:
         print('Error! Status is not 200')
         sys.exit(1)
-    return status
+    return
 
 
 def download(resources, site_url, file_dir):
@@ -40,7 +40,8 @@ def download(resources, site_url, file_dir):
 def get_obj_and_change(site_url, file_dir, output):
     resources = []
     page = requests.request('GET', site_url)
-    status = check_status(page)
+    # status = check_status(page)
+    check_status(page)
     soup = BeautifulSoup(page.text, 'html.parser')
     for tag, source in TAG_DICT.items():
         for el in soup.find_all(tag):
