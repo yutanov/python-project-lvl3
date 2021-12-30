@@ -26,7 +26,7 @@ def check_status(page):
     return status
 
 
-def download_objects(resources, site_url, file_dir):
+def download(resources, site_url, file_dir):
     with IncrementalBar('Downloading:', max=len(resources)) as progbar:
         for el in resources:
             url = f'{site_url}{el["old_value"]}'
