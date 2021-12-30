@@ -9,12 +9,12 @@ packages = [
 
 
 [tool.poetry.dependencies]
-python = "^3.8.10"
+python = "^3.9"
 bs4 = "^0.0.1"
 requests = "^2.26.0"
 pytest = "^6.2.5"
 progress = "^1.6"
-flake8 = "^3.9.2"
+flake8 = "^4.0.1"
 
 [tool.poetry.dev-dependencies]
 
