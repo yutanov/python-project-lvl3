@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
-from pageloader.maker import make_files_dir
-from pageloader.name import gen_name
+from page_loader.maker import make_files_dir
+from page_loader.name import gen_name
 from progress.bar import IncrementalBar
 import logging
 import requests

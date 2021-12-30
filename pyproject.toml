@@ -2,15 +2,16 @@
 name = "hexlet-code"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["yutanov <utanov@gmail.com>"]
 packages = [
-	{ include = "pageloader" },
+	{ include = "page_loader" },
 ]
+
 
 [tool.poetry.dependencies]
 python = "^3.9"
-pytest = "^6.2.5"
 bs4 = "^0.0.1"
+pytest = "^6.2.5"
 progress = "^1.6"
 requests = "^2.26.0"
 
@@ -21,4 +22,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-pageloader = "pageloader.scripts.main:main"
+page-loader = "page_loader.scripts.main:main"

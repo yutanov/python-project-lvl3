@@ -1,7 +1,9 @@
-from pageloader.parser import arg_parser
-from pageloader.name import gen_name
-from pageloader.maker import make_page_dir, make_files_dir
-from pageloader.pager import get_obj_and_change, download_objects
+#! /usr/bin/env python3
+
+from page_loader.parser import arg_parser
+from page_loader.name import gen_name
+from page_loader.maker import make_page_dir, make_files_dir
+from page_loader.pager import get_obj_and_change, download_objects
 import logging
 import sys
 import os

@@ -1,7 +1,8 @@
-#import pytest
-from pageloader.name import gen_name
-from pageloader.pager import get_obj_and_change, download_objects
-from pageloader.maker import make_page_dir, make_files_dir
+#! /usr/bin/env python3
+
+from page_loader.name import gen_name
+from page_loader.pager import get_obj_and_change, download_objects
+from page_loader.maker import make_page_dir, make_files_dir
 import os
 
 SITE_URL = 'https://riptutorial.com'

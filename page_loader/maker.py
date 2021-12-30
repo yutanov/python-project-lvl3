@@ -1,4 +1,4 @@
-from pageloader.name import gen_name
+from page_loader.name import gen_name
 import logging
 import os
 
