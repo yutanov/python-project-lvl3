@@ -1,61 +1,41 @@
-from bs4 import BeautifulSoup
-# from urllib.parse import urlparse
-# from page_loader.maker import make_files_dir
-from page_loader.name import gen_name
-from progress.bar import IncrementalBar
-import logging
-import requests
-import os
-import sys
+# -*- coding: utf-8 -*-
 
+"""Main module."""
+
+import logging
+import os
+
+from bs4 import BeautifulSoup
+from page_loader.common import get_url, save
+from page_loader.names import create_html_file_name, create_resources_dir_name
+from page_loader.resources import download_resources, find_resources
 
 log = logging.getLogger(__name__)
-CURRENT_DIR = os.getcwd()
-TAG_DICT = {
-    "img": "src",
-    "script": "src",
-    "link": 'href',
-}
 
 
-def check_status(page):
-    status = page.status_code
-    if status != 200:
-        print('Error! Status is not 200')
-        sys.exit(1)
-    return
+def download_obj(output, url):
+    """Download webpage and it's resources if available.
 
+    Args:
+        output: output path
+        url: url what will be saved into output path
+    """
+    url = url.rstrip('/')
+    html_file_path = os.path.join(output, create_html_file_name(url))
+    resources_dir_name = create_resources_dir_name(html_file_path)
 
-def download_obj(resources, site_url, file_dir):
-    with IncrementalBar('Downloading:', max=len(resources)) as progbar:
-        for el in resources:
-            url = f'{site_url}{el["old_value"]}'
-            path = os.path.join(file_dir, el['new_value'])
-            with open(path, 'wb') as f:
-                f.write(requests.get(url).content)
-            progbar.next()
-    log.debug('Odjects downloaded')
+    log.info(f'Saving {url} to the {output} ...')
+    soup, resources = find_resources(
+        BeautifulSoup(get_url(url).content, 'html.parser'),
+        resources_dir_name,
+    )
 
+    save(html_file_path, soup.prettify(formatter='html5'))
+    if resources:
+        download_resources(
+            resources,
+            url,
+            resources_dir_name,
+        )
 
-def get_obj_and_change(site_url, file_dir, output):
-    resources = []
-    page = requests.request('GET', site_url)
-    # status = check_status(page)
-    check_status(page)
-    soup = BeautifulSoup(page.text, 'html.parser')
-    for tag, source in TAG_DICT.items():
-        for el in soup.find_all(tag):
-            source_value = el.get(source)
-            if source_value is not None and source_value.startswith('/'):
-                base, ext = os.path.splitext(source_value)
-                if ext:
-                    new_value = f'{gen_name(base)}{ext}'
-                    resources.append(
-                        {'old_value': source_value, 'new_value': new_value},
-                    )
-                    el[source] = os.path.join(os.getcwd(), file_dir, new_value)
-    name = gen_name(site_url) + '.html'
-    with open(os.path.join(output, name), 'w') as p:
-        p.write(str(soup))
-    log.debug('Page is changed')
-    return resources
+    log.info(f'Done. You can open saved page from: {html_file_path}')
