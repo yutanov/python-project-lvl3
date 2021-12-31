@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 from page_loader.name import gen_name
-from page_loader.pager import get_obj_and_change, download
+from page_loader.pager import get_obj_and_change, download_obj
 from page_loader.maker import make_page_dir, make_files_dir
 import os
 
@@ -38,6 +38,6 @@ def test_download():
     'm2d-m2-ai-pghb-riptutorial-home.js',
     'assets-css-master-min-css-v-1-0-0.21822',
     ]
-    download(RESOURSES_LIST, SITE_URL, FILE_DIR)
+    download_obj(RESOURSES_LIST, SITE_URL, FILE_DIR)
     list_of_downloaded = os.listdir('riptutorial/riptutorial-com_files')
     assert list_of_objects == list_of_downloaded
