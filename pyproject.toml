@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "altvec_page_loader"
+name = "hexlet-code"
 version = "0.4.4"
 description = "Page loader project on hexlet"
 authors = ["altvec <me@sergeykalistratov.com>"]
