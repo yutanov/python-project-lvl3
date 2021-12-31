@@ -1,25 +1,14 @@
-all: install
-
-install:
+install: ## Install dependencies
 	@poetry install
 
-package-install:
-	@pip install --user --index-url https://test.pypi.org/simple/ \
-	    --extra-index-url https://pypi.org/simple/ altvec-page-loader
-
-lint:
-	@poetry run flake8 page_loader
-
-test:
-	poetry run coverage run --source=page_loader -m pytest tests
-
-cc-coverage:
-	poetry run coverage xml
-
-build: lint test
+build: ## Check and builds a package
 	@poetry build
-
-publish:
-	@poetry publish -r testing
-
-.PHONY: all install package-install lint test build publish
+build-reinstall:
+	poetry build
+	python3 -m pip install --force-reinstall dist/*.whl
+package-install:
+	python3 -m pip install --user dist/*.whl
+test:
+	poetry run pytest
+lint: ## Run linter
+	poetry run flake8 page_loader

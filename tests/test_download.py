@@ -1,62 +1,43 @@
-# -*- coding: utf-8 -*-
+#! /usr/bin/env python3
 
-"""Basic tests."""
-
+from page_loader.name import gen_name
+from page_loader.download import get_obj_and_change, download_obj
+from page_loader.maker import make_page_dir, make_files_dir
 import os
-from tempfile import TemporaryDirectory
 
-import pytest
-from requests.exceptions import HTTPError
+SITE_URL = 'https://riptutorial.com'
+FILE_DIR = 'riptutorial-com_files'
+OUTPUT = 'riptutorial'
+RESOURSES_LIST = [
+    {'old_value': '/Images/logo_rip_full_white.png', 'new_value': 'images-logo-rip-full-white.png'},
+    {'old_value': '/Images/logo_rip_full_white.png', 'new_value': 'images-logo-rip-full-white.png'},
+    {'old_value': '//m2d.m2.ai/pghb.riptutorial.home.js', 'new_value': 'm2d-m2-ai-pghb-riptutorial-home.js'},
+    {'old_value': '/Images/logo_rip.png', 'new_value': 'images-logo-rip.png'},
+    {'old_value': '/assets/css/master.min.css?v=1.0.0.21822', 'new_value': 'assets-css-master-min-css-v-1-0-0.21822'},
+]
 
-from page_loader.downloader import download
-from page_loader.cli import make_parser
+
+def test_gen_name():
+    name = 'riptutorial-com'
+    url = 'https://riptutorial.com'
+    generated_name = gen_name(url)
+    assert generated_name == name
 
 
-def read_file(path):
-    with open(path) as f:
-        return f.read()
-
-
-@pytest.mark.parametrize('args', (
-    ['-o', '/tmp/', 'https://example.com'],
-    ['--output', '/tmp/', 'https://example.com'],
-    ['-o', '/tmp/', '-l', 'INFO', 'https://example.com'],
-    ['-o', '/tmp/', '-l', 'DEBUG', 'https://example.com'],
-))
-def test_parse_args(args):
-    make_parser().parse_args(args)
+def test_get_obj_and_change():
+    make_page_dir(OUTPUT)
+    file_dir = make_files_dir(SITE_URL, OUTPUT)
+    resources = get_obj_and_change(SITE_URL, file_dir, OUTPUT)
+    assert RESOURSES_LIST == resources
 
 
 def test_download():
-    with TemporaryDirectory() as tmpdir:
-        download(tmpdir, 'http://example.com')
-        actual = read_file(os.path.join(tmpdir, 'example-com.html'))
-        expected = read_file('./tests/fixtures/example-com.html')
-        assert actual == expected
-
-
-def test_has_local_resources():
-    with TemporaryDirectory() as tmpdir:
-        download(tmpdir, 'https://clojure.org')
-        expected = os.path.join(
-            tmpdir,
-            'clojure-org_files',
-        )
-        assert len(os.listdir(os.path.join(expected))) != 0
-
-
-def test_404_exception():
-    with TemporaryDirectory() as tmpdir:
-        with pytest.raises(HTTPError) as excinfo:
-            url = 'https://grishaev.me/bookshelf2'
-            download(tmpdir, url)
-        assert '404 Client Error' in str(excinfo.value)
-
-
-def test_permissions_exception():
-    with TemporaryDirectory() as tmpdir:
-        os.chmod(tmpdir, 400)
-        with pytest.raises(PermissionError) as excinfo:
-            url = 'https://hexlet.io/courses'
-            download(tmpdir, url)
-        assert 'Permission denied' in str(excinfo.value)
+    list_of_objects = [
+    'images-logo-rip-full-white.png',
+    'images-logo-rip.png',
+    'm2d-m2-ai-pghb-riptutorial-home.js',
+    'assets-css-master-min-css-v-1-0-0.21822',
+    ]
+    download_obj(RESOURSES_LIST, SITE_URL, FILE_DIR)
+    list_of_downloaded = os.listdir('riptutorial/riptutorial-com_files')
+    assert list_of_objects == list_of_downloaded
