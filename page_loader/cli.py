@@ -1,31 +1,11 @@
-# -*- coding: utf-8 -*-
-
-"""Page loader CLI parser."""
-
 import argparse
+import os
 
-from page_loader import logging
 
+def get_parser():
+    parser = argparse.ArgumentParser(description='page loader')
+    parser.add_argument('url', type=str, help='name of website address')
+    parser.add_argument('-o', '--output', type=str, default=os.getcwd(),
+                        help='output directory')
 
-def make_parser():
-    """Create CLI argument parser.
-
-    Returns:
-        argparse.ArgumentParser
-    """
-    parser = argparse.ArgumentParser(description='Page loader')
-    parser.add_argument('url', type=str)
-    parser.add_argument(
-        '-o',
-        '--output',
-        type=str,
-        help='set output directory',
-    )
-    parser.add_argument(
-        '-l',
-        '--log-level',
-        choices=logging.LEVELS,
-        default=logging.INFO,
-        help='set log level',
-    )
     return parser

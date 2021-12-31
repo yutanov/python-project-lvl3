@@ -1,27 +1,26 @@
-#! /usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-"""Page loader script."""
-
+from page_loader.cli import get_parser
+from page_loader import download, PageLoadingError
+from page_loader.logging import logging
 import sys
-
-from page_loader.cli import make_parser
-from page_loader.download import download_obj
-from page_loader.logging import configure_logger
 
 
 def main():
-    """Download and save specified webpage."""
-    args = make_parser().parse_args()
-    configure_logger(args.log_level)
+    parser = get_parser()
+    args = parser.parse_args()
     try:
-        download_obj(args.output, args.url)
-    except Exception as e:
-        if 'url' in str(e.args):
-            sys.exit(1)
-        elif 'Permission denied' in str(e.args):
-            sys.exit(2)
-    sys.exit(0)
+        file_path = download(args.url, args.output)
+        print(f'Page saved in {file_path}')
+    except PageLoadingError as e:
+        logging.error(e.error_message)
+        sys.exit(1)
+    except PermissionError:
+        logging.error('Not enough access rights')
+        sys.exit(1)
+    except FileNotFoundError:
+        logging.error('No such file or directory')
+        sys.exit(1)
+    else:
+        sys.exit(0)
 
 
 if __name__ == '__main__':
