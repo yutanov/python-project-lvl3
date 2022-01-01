@@ -1,19 +1,14 @@
-install:
-	poetry install
+install: ## Install dependencies
+	@poetry install
 
-page-loader:
-	poetry run page-loader --output page_loader/data https://httpbin.org
-build:
+build: ## Check and builds a package
+	@poetry build
+build-reinstall:
 	poetry build
-
+	python3 -m pip install --force-reinstall dist/*.whl
 package-install:
-	pip install --user dist/*.whl
-
-lint:
-	poetry run flake8 page_loader
-	poetry run flake8 tests
-
+	python3 -m pip install --user dist/*.whl
 test:
-	poetry run pytest -v --cov=page_loader tests/ --cov-report xml
-
-.PHONY: install build package-install lint page-loader test
+	PYTHONPATH=. pytest
+lint: ## Run linter
+	poetry run flake8 page_loader

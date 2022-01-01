@@ -2,22 +2,21 @@
 name = "hexlet-code"
 version = "0.1.0"
 description = ""
-authors = ["Serggi0 <serve4mia@gmail.com>"]
+authors = ["yutanov <utanov@gmail.com>"]
 packages = [
-  { include = "page_loader" },
+	{ include = "page_loader" },
 ]
 
+
 [tool.poetry.dependencies]
-python = "^3.8"
-requests = "^2.26.0"
+python = "^3.8.10"
 bs4 = "^0.0.1"
+requests = "^2.26.0"
+pytest = "^6.2.5"
 progress = "^1.6"
+flake8 = "^3.9.2"
 
 [tool.poetry.dev-dependencies]
-flake8 = "^3.9.2"
-pytest-cov = "^2.12.1"
-coverage = "^5.5"
-requests-mock = "^1.9.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
