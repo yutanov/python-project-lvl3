@@ -6,7 +6,7 @@ from page_loader.maker import make_page_dir, make_files_dir
 from page_loader import download
 import logging
 import sys
-import os
+# import os
 
 
 logging.basicConfig(
