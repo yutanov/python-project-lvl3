@@ -1,27 +1,41 @@
-from page_loader.cli import get_parser
-from page_loader import download, PageLoadingError
-from page_loader.logging import logging
+#! /usr/bin/env python3
+
+from page_loader.parser import arg_parser
+# from page_loader.name import gen_name
+from page_loader.maker import make_page_dir, make_files_dir
+from page_loader.download import get_obj_and_change, download_obj
+import logging
 import sys
+import os
+
+
+logging.basicConfig(
+    filename='example.log', encoding='utf-8',
+    # handlers=[logging.StreamHandler(sys.stdout)],
+    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+    level=logging.DEBUG,
+    )
 
 
 def main():
-    parser = get_parser()
-    args = parser.parse_args()
     try:
-        file_path = download(args.url, args.output)
-        print(f'Page saved in {file_path}')
-    except PageLoadingError as e:
-        logging.error(e.error_message)
-        sys.exit(1)
-    except PermissionError:
-        logging.error('Not enough access rights')
-        sys.exit(1)
-    except FileNotFoundError:
-        logging.error('No such file or directory')
-        sys.exit(1)
-    else:
-        sys.exit(0)
+        site_url = arg_parser().parse_args().url
+        output = arg_parser().parse_args().output
+        if output is None:
+            output = os.getcwd()
+        make_page_dir(output)
+        file_dir = make_files_dir(site_url, output)
+        resources = get_obj_and_change(site_url, file_dir, output)
+        download_obj(resources, site_url, file_dir)
+    except Exception as e:
+        if 'url' in str(e.args):
+            print('Wrong URL')
+            sys.exit(1)
+        elif 'Permission denied' in str(e.args):
+            print('Permission denied to the specified directory')
+            sys.exit(2)
+    sys.exit(0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

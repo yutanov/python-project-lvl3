@@ -1,17 +1,14 @@
-install:
-	poetry install
+install: ## Install dependencies
+	@poetry install
 
-lint:
-	poetry run flake8 page_loader tests
-
-test:
-	poetry run pytest --cov=page_loader --cov-report xml tests/
-
-coverage:
-	poetry run coverage xml
-
-build:
+build: ## Check and builds a package
+	@poetry build
+build-reinstall:
 	poetry build
-
+	python3 -m pip install --force-reinstall dist/*.whl
 package-install:
-	pip install --user dist/*.whl
+	python3 -m pip install --user dist/*.whl
+test:
+	poetry run pytest
+lint: ## Run linter
+	poetry run flake8 page_loader
