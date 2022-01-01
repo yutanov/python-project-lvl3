@@ -1,19 +1,25 @@
-install:
-	poetry install
+all: install
 
-page-loader:
-	poetry run page-loader --output page_loader/data https://httpbin.org
-build:
-	poetry build
+install:
+	@poetry install
 
 package-install:
-	pip install --user dist/*.whl
+	@pip install --user --index-url https://test.pypi.org/simple/ \
+	    --extra-index-url https://pypi.org/simple/ altvec-page-loader
 
 lint:
-	poetry run flake8 page_loader
-	poetry run flake8 tests
+	@poetry run flake8 page_loader
 
 test:
-	poetry run pytest -v --cov=page_loader tests/ --cov-report xml
+	poetry run coverage run --source=page_loader -m pytest tests
 
-.PHONY: install build package-install lint page-loader test
+cc-coverage:
+	poetry run coverage xml
+
+build: lint test
+	@poetry build
+
+publish:
+	@poetry publish -r testing
+
+.PHONY: all install package-install lint test build publish

@@ -1,27 +1,36 @@
 [tool.poetry]
-name = "hexlet-code"
-version = "0.1.0"
-description = ""
-authors = ["Serggi0 <serve4mia@gmail.com>"]
+name = "altvec_page_loader"
+version = "0.4.4"
+description = "Page loader project on hexlet"
+authors = ["altvec <me@sergeykalistratov.com>"]
+repository = "https://github.com/altvec/python-project-lvl3"
+license = "MIT"
 packages = [
-  { include = "page_loader" },
+    { include = "page_loader" },
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Environment :: Console",
+    "License :: Freeware", 
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-requests = "^2.26.0"
-bs4 = "^0.0.1"
+python = "^3.6"
+requests = "^2.26"
+beautifulsoup4 = "^4.10"
 progress = "^1.6"
 
 [tool.poetry.dev-dependencies]
-flake8 = "^3.9.2"
-pytest-cov = "^2.12.1"
-coverage = "^5.5"
-requests-mock = "^1.9.3"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+pytest = "^6.2"
+wemake-python-styleguide = "^0.16.0"
+flake8 = "^4.0"
+coverage = "^6.1"
+pytest-cov = "^3.0.0"
 
 [tool.poetry.scripts]
 page-loader = "page_loader.scripts.page_loader:main"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

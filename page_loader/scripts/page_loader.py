@@ -1,31 +1,27 @@
-#!/usr/bin/env python
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""Page loader script."""
 
 import sys
-import logging.config
-from page_loader.page_loader import download
-from page_loader.cli import create_parser
-from page_loader.settings_logging import logger_config
-from page_loader.custom_exseptions import AppInternalError
 
-
-logging.config.dictConfig(logger_config)
+from page_loader.cli import make_parser
+from page_loader.downloader import download
+from page_loader.logging import configure_logger
 
 
 def main():
-    logger = logging.getLogger('app_logger')
-    my_parser = create_parser()
-    args = my_parser.parse_args()
-
+    """Download and save specified webpage."""
+    args = make_parser().parse_args()
+    configure_logger(args.log_level)
     try:
-        result = download(args.url, args.output)
-        print()
-        print('Page was successfully downloaded into -> ',
-              result, end='\n\n')
-        logger.debug('Finished')
-        sys.exit(0)
-    except AppInternalError as error:
-        logger.exception(error)
-        sys.exit(f'{error}')
+        download(args.output, args.url)
+    except Exception as e:
+        if 'url' in str(e.args):
+            sys.exit(1)
+        elif 'Permission denied' in str(e.args):
+            sys.exit(2)
+    sys.exit(0)
 
 
 if __name__ == '__main__':

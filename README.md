@@ -1,77 +1,56 @@
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/Serggi0/python-project-lvl3/workflows/hexlet-check/badge.svg)](https://github.com/Serggi0/python-project-lvl3/actions)  *Hexlet tests and linter status*
+# Page loader
 
-[![lint & test GitHub action for develop branch](https://github.com/Serggi0/python-project-lvl3/actions/workflows/github_action_.yaml/badge.svg)](https://github.com/Serggi0/python-project-lvl3/actions/workflows/github_action_.yaml)  *GitHub action badge*
+[![Github Actions Status](https://github.com/altvec/python-project-lvl3/workflows/Python%20CI/badge.svg)](https://github.com/altvec/python-project-lvl3/actions)
+[![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
+[![Maintainability](https://api.codeclimate.com/v1/badges/48644f081f215379ebad/maintainability)](https://codeclimate.com/github/altvec/python-project-lvl3/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/48644f081f215379ebad/test_coverage)](https://codeclimate.com/github/altvec/python-project-lvl3/test_coverage)
 
-<!-- [! [Статус действий YourActionName] (https://github.com/ { userName } / { repoName } / workflows / { workflowName } /badge.svg)] (https://github.com/ { userName } / { repoName } / action) -->
+This is a CLI utility for downloading the specified webpage from the Internets.
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/f6ba19bc9e1493dbd1ce/maintainability)](https://codeclimate.com/github/Serggi0/python-project-lvl3/maintainability)  *CodeClimate Maintainability badge*
+## Installation
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/f6ba19bc9e1493dbd1ce/test_coverage)](https://codeclimate.com/github/Serggi0/python-project-lvl3/test_coverage)  *CodeClimate test coverage badge*
+``` bash
+pip install --user --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ altvec-page-loader
+```
 
-This is third training project on [Hexlet.io](https://ru.hexlet.io) course.
+## Usage
 
-Page-loader is a command-line utility that downloads pages from the Internet and saves them on your computer. Together with the page, it downloads all the resources (images, styles, and js), allowing you to open the page without the Internet.
+``` bash
+usage: page-loader [-h] [-o OUTPUT] [-l {INFO,DEBUG}] url
 
-#### Usage
-
-```Python
-usage: page-loader [-h] [-o OUTPUT] url
-
-download the page from the web
+Page loader
 
 positional arguments:
-  url                   Add a download page
+  url
 
 optional arguments:
   -h, --help            show this help message and exit
   -o OUTPUT, --output OUTPUT
-                        Specify the directory to save the page
-                        in(by default, in the program launch
-                        directory)
+                        set output directory
+  -l {INFO,DEBUG}, --log-level {INFO,DEBUG}
+                        set log level
 ```
 
-#### Examples of working the programm
-```Python
-page-loader --output path/to/dir URL
+## Downloading simple webpage
+
+``` bash
+page-loader --output . http://example.com
 ```
 
-<details>
-<summary> Stages of project preparation</summary>
+[![asciicast](https://asciinema.org/a/CNIZ4DO7kT0wNqTcm3QbMybTe.svg)](https://asciinema.org/a/CNIZ4DO7kT0wNqTcm3QbMybTe)
 
-#### Asciinema step1:
-```Python
-poetry run page-loader
-```
-[![asciicast](https://asciinema.org/a/7hYK6eUqGKHmGHrlfnqbkn1Yx.svg)](https://asciinema.org/a/7hYK6eUqGKHmGHrlfnqbkn1Yx)
+## Downloading webpage with local resources
 
-#### Asciinema step2:
-```Python
-poetry run page-loader -h
+``` bash
+page-loader -o /tmp/ https://ru.hexlet.io/courses
 ```
-[![asciicast](https://asciinema.org/a/hyWuuPyuYEXmKA5WBaRkU84gC.svg)](https://asciinema.org/a/hyWuuPyuYEXmKA5WBaRkU84gC)
 
-#### Asciinema step3:
-```Python
-tree
-```
-[![asciicast](https://asciinema.org/a/426188.svg)](https://asciinema.org/a/426188)
+[![asciicast](https://asciinema.org/a/Xk6o4tNfi5VQyLKtpqQzrbzhk.svg)](https://asciinema.org/a/Xk6o4tNfi5VQyLKtpqQzrbzhk)
 
-#### Asciinema step4:
-```Python
-cat myapp.log
-```
-[![asciicast](https://asciinema.org/a/mGcD16tlA3LBYh8D82OlO8B14.svg)](https://asciinema.org/a/mGcD16tlA3LBYh8D82OlO8B14)
+## Downloadig webpage with local resources and DEBUG mode
 
-#### Asciinema step5:
-```Python
-make page-loader
+``` bash
+page-loader -o /tmp/ -l DEBUG https://ru.hexlet.io/courses
 ```
-[![asciicast](https://asciinema.org/a/bV12dNP1YviNbKM0AAYmXf3i4.svg)](https://asciinema.org/a/bV12dNP1YviNbKM0AAYmXf3i4)
 
-#### Asciinema step6:
-```Python
-make page-loader 
-```
-[![asciicast](https://asciinema.org/a/gajXHWvoFj7Z6uwUSH9T5T8RL.svg)](https://asciinema.org/a/gajXHWvoFj7Z6uwUSH9T5T8RL)
-</details>
+[![asciicast](https://asciinema.org/a/PvfKaog7eyr5dbiEifmdvwLz3.svg)](https://asciinema.org/a/PvfKaog7eyr5dbiEifmdvwLz3)
