@@ -6,7 +6,7 @@
 import sys
 
 from page_loader.cli import make_parser
-from page_loader.downloader import download
+from page_loader.download import download
 from page_loader.logging import configure_logger
 
 
