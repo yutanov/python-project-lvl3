@@ -21,7 +21,7 @@ TAG_DICT = {
 def check_status(page):
     status = page.status_code
     if status != 200:
-        print('Error! Status is not 200')
+        raise('Error! Status is not 200')
         # sys.exit(1)
     return
 
