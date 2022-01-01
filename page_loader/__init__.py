@@ -6,8 +6,8 @@ import os
 NAME = 'page_loader'
 
 
-def download(site_url, file_dir, output):
-    # if output is None:
-    #    output = os.getcwd()
+def download(site_url, file_dir, output=None):
+    if output is None:
+        output = os.getcwd()
     page = download_page(site_url, file_dir, output)
     return page
