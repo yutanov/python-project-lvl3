@@ -38,7 +38,7 @@ def download_obj(resources, site_url, file_dir):
     log.debug('Odjects downloaded')
 
 
-def download(site_url, file_dir, output):
+def download_page(site_url, file_dir, output):
     resources = []
     page = requests.request('GET', site_url)
     # status = check_status(page)

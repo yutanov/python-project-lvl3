@@ -3,7 +3,7 @@
 from page_loader.parser import arg_parser
 # from page_loader.name import gen_name
 from page_loader.maker import make_page_dir, make_files_dir
-from page_loader.page_loader import download
+from page_loader.pager import download_page
 import logging
 import sys
 import os
@@ -15,6 +15,11 @@ logging.basicConfig(
     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
     level=logging.DEBUG,
     )
+
+
+def download(site_url, file_dir, output):
+    page = download_page(site_url, file_dir, output)
+    return page
 
 
 def main():
