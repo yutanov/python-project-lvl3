@@ -9,7 +9,11 @@ def make_page_dir(output):
     cur_dir = os.getcwd()
     path = os.path.join(cur_dir, output)
     if os.path.exists(path) is False:
-        os.makedirs(path)
+        try:
+            os.makedirs(path)
+        except:
+            log.debug('Page directory is created')
+            raise('Wrong directory!')
     log.debug('Page directory is created')
 
 
