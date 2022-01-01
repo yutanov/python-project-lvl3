@@ -41,7 +41,7 @@ def download_page(site_url, file_dir, output):
     resources = []
     page = requests.request('GET', site_url)
     # status = check_status(page)
-    check_status(page)
+    #check_status(page)
     soup = BeautifulSoup(page.text, 'html.parser')
     for tag, source in TAG_DICT.items():
         for el in soup.find_all(tag):
