@@ -1,6 +1,7 @@
 from page_loader.name import gen_name
 import logging
 import os
+import sys
 
 log = logging.getLogger(__name__)
 
@@ -14,6 +15,7 @@ def make_page_dir(output):
         except:
             log.debug('Page directory is created')
             raise('Wrong directory!')
+            sys.exit(1)
     log.debug('Page directory is created')
 
 

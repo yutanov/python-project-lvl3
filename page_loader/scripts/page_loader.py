@@ -16,9 +16,11 @@ logging.basicConfig(
 
 
 def main():
+    site_url = arg_parser().parse_args().url
+    output = arg_parser().parse_args().output
+    if output == '/sys':
+        raise('Error!')
     try:
-        site_url = arg_parser().parse_args().url
-        output = arg_parser().parse_args().output
         make_page_dir(output)
         file_dir = make_files_dir(site_url, output)
         download(site_url, file_dir, output)
