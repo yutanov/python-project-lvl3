@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 from pathlib import Path
-# from page_loader.maker import make_files_dir
 from page_loader.name import gen_name
 from progress.bar import IncrementalBar
 import logging
@@ -40,8 +39,7 @@ def download_obj(resources, site_url, file_dir):
 def download_page(site_url, file_dir, output):
     resources = []
     page = requests.request('GET', site_url)
-    # status = check_status(page)
-    #check_status(page)
+    check_status(page)
     soup = BeautifulSoup(page.text, 'html.parser')
     for tag, source in TAG_DICT.items():
         for el in soup.find_all(tag):
@@ -59,8 +57,5 @@ def download_page(site_url, file_dir, output):
     web_page = Path(output) / name
     page = soup.prettify()
     Path(web_page).write_text(page)
-    # with open(os.path.join(output, name), 'w') as p:
-    #    p.write(str(soup.prettify()))
     log.debug('Page is changed')
-    # return resources
     return str(web_page)

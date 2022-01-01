@@ -1,12 +1,10 @@
 #! /usr/bin/env python3
 
 from page_loader.parser import arg_parser
-# from page_loader.name import gen_name
 from page_loader.maker import make_page_dir, make_files_dir
 from page_loader import download
 import logging
 import sys
-# import os
 
 
 logging.basicConfig(
@@ -24,8 +22,6 @@ def main():
         make_page_dir(output)
         file_dir = make_files_dir(site_url, output)
         download(site_url, file_dir, output)
-        # resources = get_obj_and_change(site_url, file_dir, output)
-        # download_obj(resources, site_url, file_dir)
     except Exception as e:
         if 'url' in str(e.args):
             print('Wrong URL')
