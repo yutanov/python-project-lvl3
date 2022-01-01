@@ -3,7 +3,7 @@
 from page_loader.parser import arg_parser
 # from page_loader.name import gen_name
 from page_loader.maker import make_page_dir, make_files_dir
-from page_loader.pager import download_page
+from page_loader import download
 import logging
 import sys
 import os
@@ -17,11 +17,6 @@ logging.basicConfig(
     )
 
 
-def download(site_url, file_dir, output):
-    page = download_page(site_url, file_dir, output)
-    return page
-
-
 def main():
     try:
         site_url = arg_parser().parse_args().url
@@ -31,8 +26,8 @@ def main():
         make_page_dir(output)
         file_dir = make_files_dir(site_url, output)
         download(site_url, file_dir, output)
-        #resources = get_obj_and_change(site_url, file_dir, output)
-        #download_obj(resources, site_url, file_dir)
+        # resources = get_obj_and_change(site_url, file_dir, output)
+        # download_obj(resources, site_url, file_dir)
     except Exception as e:
         if 'url' in str(e.args):
             print('Wrong URL')
