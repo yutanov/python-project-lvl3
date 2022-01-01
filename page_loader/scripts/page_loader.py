@@ -1,41 +1,32 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python
 
-from page_loader.parser import arg_parser
-# from page_loader.name import gen_name
-from page_loader.maker import make_page_dir, make_files_dir
-from page_loader.download import get_obj_and_change, download_obj
-import logging
 import sys
-import os
+import logging.config
+from page_loader.page_loader import download
+from page_loader.cli import create_parser
+from page_loader.settings_logging import logger_config
+from page_loader.custom_exseptions import AppInternalError
 
 
-logging.basicConfig(
-    filename='example.log', encoding='utf-8',
-    # handlers=[logging.StreamHandler(sys.stdout)],
-    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-    level=logging.DEBUG,
-    )
+logging.config.dictConfig(logger_config)
 
 
 def main():
+    logger = logging.getLogger('app_logger')
+    my_parser = create_parser()
+    args = my_parser.parse_args()
+
     try:
-        site_url = arg_parser().parse_args().url
-        output = arg_parser().parse_args().output
-        if output is None:
-            output = os.getcwd()
-        make_page_dir(output)
-        file_dir = make_files_dir(site_url, output)
-        resources = get_obj_and_change(site_url, file_dir, output)
-        download_obj(resources, site_url, file_dir)
-    except Exception as e:
-        if 'url' in str(e.args):
-            print('Wrong URL')
-            sys.exit(1)
-        elif 'Permission denied' in str(e.args):
-            print('Permission denied to the specified directory')
-            sys.exit(2)
-    sys.exit(0)
+        result = download(args.url, args.output)
+        print()
+        print('Page was successfully downloaded into -> ',
+              result, end='\n\n')
+        logger.debug('Finished')
+        sys.exit(0)
+    except AppInternalError as error:
+        logger.exception(error)
+        sys.exit(f'{error}')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
