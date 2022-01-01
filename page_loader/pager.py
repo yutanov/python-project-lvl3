@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 from pathlib import Path
-# from urllib.parse import urlparse
 # from page_loader.maker import make_files_dir
 from page_loader.name import gen_name
 from progress.bar import IncrementalBar
