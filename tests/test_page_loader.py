@@ -31,13 +31,26 @@ def test_get_obj_and_change():
     assert RESOURSES_LIST == resources
 
 
+# def test_download():
+#    list_of_objects = [
+#    'images-logo-rip-full-white.png',
+#    'images-logo-rip.png',
+#    'm2d-m2-ai-pghb-riptutorial-home.js',
+#    'assets-css-master-min-css-v-1-0-0.21822',
+#    ]
+#    download_obj(RESOURSES_LIST, SITE_URL, FILE_DIR)
+#    list_of_downloaded = os.listdir('riptutorial/riptutorial-com_files')
+#    assert list_of_objects == list_of_downloaded
+
+
 def test_download():
-    list_of_objects = [
-    'images-logo-rip-full-white.png',
-    'images-logo-rip.png',
-    'm2d-m2-ai-pghb-riptutorial-home.js',
-    'assets-css-master-min-css-v-1-0-0.21822',
-    ]
-    download_obj(RESOURSES_LIST, SITE_URL, FILE_DIR)
-    list_of_downloaded = os.listdir('riptutorial/riptutorial-com_files')
-    assert list_of_objects == list_of_downloaded
+    make_page_dir(OUTPUT)
+    file_dir = make_files_dir(SITE_URL, OUTPUT)
+    resources = get_obj_and_change(SITE_URL, file_dir, OUTPUT)
+    download_obj(resources, SITE_URL, file_dir)
+    name = gen_name(SITE_URL) + '.html'
+    file_path = os.path.join(OUTPUT, name)
+    f_test = open(file_path)
+    file_example = 'tests/fixtures/riptutorial-com.html'
+    f_example = open(file_example)
+    assert f_test.read() == f_example.read()

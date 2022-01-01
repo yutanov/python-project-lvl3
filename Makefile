@@ -9,6 +9,6 @@ build-reinstall:
 package-install:
 	python3 -m pip install --user dist/*.whl
 test:
-	poetry run pytest
+	PYTHONPATH=. pytest
 lint: ## Run linter
 	poetry run flake8 page_loader
