@@ -1,4 +1,5 @@
 from page_loader.name import gen_name
+from page_loader.exceptions import ErrorSystem
 import logging
 import os
 import sys
@@ -7,16 +8,14 @@ log = logging.getLogger(__name__)
 
 
 def make_page_dir(output):
-    cur_dir = os.getcwd()
-    path = os.path.join(cur_dir, output)
-    if os.path.exists(path) is False:
-        try:
+    try:
+        cur_dir = os.getcwd()
+        path = os.path.join(cur_dir, output)
+        if os.path.exists(path) is False:
             os.makedirs(path)
-        except:
-            log.debug('Page directory is created')
-            raise('Wrong directory!')
-            sys.exit(1)
-    log.debug('Page directory is created')
+        log.debug('Page directory is created')
+    except OSError as err:
+        raise ErrorSystem('Error! Wrong directory') from err
 
 
 def make_files_dir(site_url, output):

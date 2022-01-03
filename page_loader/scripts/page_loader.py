@@ -3,7 +3,6 @@
 from page_loader.parser import arg_parser
 from page_loader.maker import make_page_dir, make_files_dir
 from page_loader import download
-from page_loader.exceptions import ErrorSystem
 import logging
 import sys
 
@@ -19,12 +18,10 @@ logging.basicConfig(
 def main():
     site_url = arg_parser().parse_args().url
     output = arg_parser().parse_args().output
+
     try:
         make_page_dir(output)
         file_dir = make_files_dir(site_url, output)
-    except OSError as err:
-        raise ErrorSystem('Error! Wrong directory') from err
-    try:
         download(site_url, file_dir, output)
     except Exception as e:
         if 'url' in str(e.args):
