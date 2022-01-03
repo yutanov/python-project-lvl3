@@ -5,7 +5,6 @@ from progress.bar import IncrementalBar
 import logging
 import requests
 import os
-import sys
 
 
 log = logging.getLogger(__name__)

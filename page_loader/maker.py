@@ -2,7 +2,6 @@ from page_loader.name import gen_name
 from page_loader.exceptions import ErrorSystem
 import logging
 import os
-import sys
 
 log = logging.getLogger(__name__)
 
